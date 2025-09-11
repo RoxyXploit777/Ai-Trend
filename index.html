@@ -19,117 +19,38 @@ body {
   position:relative;
 }
 /* Animated bubbles */
-.bubble {
-  position:absolute;
-  border-radius:50%;
-  background: rgba(99,102,241,0.2);
-  animation: rise 10s linear infinite;
-  opacity:0.6;
-}
-@keyframes rise {
-  0% { transform: translateY(100vh) scale(0.5); opacity:0; }
-  20% { opacity:0.3; }
-  50% { opacity:0.6; }
-  80% { opacity:0.3; }
-  100% { transform: translateY(-20vh) scale(1); opacity:0; }
-}
+.bubble { position:absolute; border-radius:50%; background: rgba(99,102,241,0.2); animation: rise 10s linear infinite; opacity:0.6; }
+@keyframes rise { 0% { transform: translateY(100vh) scale(0.5); opacity:0; } 20% { opacity:0.3; } 50% { opacity:0.6; } 80% { opacity:0.3; } 100% { transform: translateY(-20vh) scale(1); opacity:0; } }
 
 h1 { font-size:2rem; margin-bottom:20px; text-align:center; color:#4f46e5; z-index:2; }
 
 .tabs { display:flex; gap:15px; margin-bottom:30px; z-index:2; }
-.tabs button {
-  padding:12px 25px;
-  border-radius:12px;
-  border:2px solid #6366f1;
-  cursor:pointer;
-  background:white;
-  font-weight:600;
-  color:#4f46e5;
-  transition:0.3s;
-}
+.tabs button { padding:12px 25px; border-radius:12px; border:2px solid #6366f1; cursor:pointer; background:white; font-weight:600; color:#4f46e5; transition:0.3s; }
 .tabs button.active { background:#6366f1; color:white; }
 .tabs button:hover { background:#4f46e5; color:white; }
 
-.box {
-  background:#fff;
-  border-radius:20px;
-  padding:35px 25px;
-  max-width:500px;
-  width:100%;
-  box-shadow:0 15px 30px rgba(0,0,0,0.1);
-  text-align:center;
-  display:none;
-  position:relative; z-index:2;
-}
+.box { background:#fff; border-radius:20px; padding:35px 25px; max-width:500px; width:100%; box-shadow:0 15px 30px rgba(0,0,0,0.1); text-align:center; display:none; position:relative; z-index:2; }
 .box.active { display:block; }
 
-.drop-area {
-  border:3px dashed #6366f1;
-  border-radius:15px;
-  padding:60px;
-  margin-bottom:15px;
-  cursor:pointer;
-  color:#4f46e5;
-  font-weight:bold;
-  font-size:1.1rem;
-  transition: background 0.3s, border-color 0.3s, transform 0.3s;
-}
+.drop-area { border:3px dashed #6366f1; border-radius:15px; padding:60px; margin-bottom:15px; cursor:pointer; color:#4f46e5; font-weight:bold; font-size:1.1rem; transition: background 0.3s, border-color 0.3s, transform 0.3s; }
 .drop-area.hover { background:#eef2ff; border-color:#4f46e5; transform:scale(1.03); }
 
 input[type="file"] { display:none; }
-input[type="text"], button {
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:10px;
-  border:1px solid #cbd5e1;
-  font-size:1rem;
-  transition:0.3s;
-}
-button {
-  background:#6366f1;
-  color:white;
-  border:none;
-  font-weight:bold;
-  cursor:pointer;
-  transition:all 0.3s;
-}
+input[type="text"], button { width:100%; padding:12px; margin:10px 0; border-radius:10px; border:1px solid #cbd5e1; font-size:1rem; transition:0.3s; }
+button { background:#6366f1; color:white; border:none; font-weight:bold; cursor:pointer; transition:all 0.3s; }
 button:hover { background:#4f46e5; transform:translateY(-2px) scale(1.05); box-shadow:0 6px 15px rgba(0,0,0,0.15); }
 
 #uploadResult, #figureResult { margin-top:20px; word-break:break-word; text-align:center; }
 pre { color:red; text-align:left; white-space:pre-wrap; }
 
-.spinner {
-  border:5px solid #f3f3f3;
-  border-top:5px solid #6366f1;
-  border-radius:50%;
-  width:50px;
-  height:50px;
-  animation:spin 1s linear infinite;
-  margin:20px auto;
-}
-
+.spinner { border:5px solid #f3f3f3; border-top:5px solid #6366f1; border-radius:50%; width:50px; height:50px; animation:spin 1s linear infinite; margin:20px auto; }
 @keyframes spin { 100% { transform:rotate(360deg); } }
 
-.instructions {
-  margin-top:35px;
-  max-width:500px;
-  text-align:left;
-  background:#eef2ff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
-  z-index:2;
-}
+.instructions { margin-top:35px; max-width:500px; text-align:left; background:#eef2ff; padding:25px; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.05); z-index:2; }
 .instructions h2 { margin-bottom:10px; color:#6366f1; }
 .instructions li { margin-bottom:10px; line-height:1.5; }
 
-@media(max-width:500px){
-  .box { padding:25px; }
-  .tabs button { padding:10px 15px; font-size:0.9rem; }
-  .instructions { padding:20px; }
-  .drop-area { padding:50px; font-size:1rem; }
-}
+@media(max-width:500px){ .box { padding:25px; } .tabs button { padding:10px 15px; font-size:0.9rem; } .instructions { padding:20px; } .drop-area { padding:50px; font-size:1rem; } }
 </style>
 </head>
 <body>
@@ -157,13 +78,11 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
 <div class="instructions">
 <h2>Cara Pakai:</h2>
 <ol>
-<li>Pilih tab <strong>Image to URL</strong> untuk mengubah gambar menjadi URL.</li>
-<li>Upload gambar dengan klik atau drop di kotak. Nama file akan muncul di box.</li>
-<li>Spinner muncul di bawah box saat proses upload berjalan.</li>
-<li>Setelah upload selesai, URL dan tombol copy muncul di bawah box.</li>
-<li>Pindah ke tab <strong>URL to Miniatur</strong> untuk membuat gambar menjadi figure miniatur.</li>
-<li>Masukkan URL hasil upload ke kolom, lalu klik <strong>URL to Miniatur</strong>.</li>
-<li>Hasil figure akan muncul di bawah dengan tombol download.</li>
+<li>Pilih tab <strong>Image to URL</strong>.</li>
+<li>Drop gambar ke box. Halaman otomatis refresh, nama file dan URL akan muncul.</li>
+<li>Pindah ke tab <strong>URL to Miniatur</strong> untuk membuat miniatur.</li>
+<li>Masukkan URL hasil upload dan klik <strong>URL to Miniatur</strong>.</li>
+<li>Download hasil miniatur.</li>
 </ol>
 </div>
 
@@ -181,7 +100,6 @@ function openTab(tab){
 const dropArea = document.getElementById('dropArea');
 const fileInput = document.getElementById('fileInput');
 const spinnerContainer = document.getElementById('spinnerContainer');
-const uploadResult = document.getElementById('uploadResult');
 
 dropArea.addEventListener('click', ()=>fileInput.click());
 dropArea.addEventListener('dragover', e=>{ e.preventDefault(); dropArea.classList.add('hover'); });
@@ -189,36 +107,47 @@ dropArea.addEventListener('dragleave', e=>{ dropArea.classList.remove('hover'); 
 dropArea.addEventListener('drop', e=>{
   e.preventDefault();
   dropArea.classList.remove('hover');
-  fileInput.files = e.dataTransfer.files;
-  handleFile(fileInput.files[0]);
+  if(e.dataTransfer.files.length){
+    const file = e.dataTransfer.files[0];
+    sessionStorage.setItem('uploadedFileName', file.name); 
+    uploadAndRefresh(file);
+  }
 });
 
-// Handle selected file
-function handleFile(file){
-  dropArea.textContent = `File terpilih: ${file.name}`;
-  spinnerContainer.innerHTML = '<div class="spinner"></div>';
-  uploadResult.innerHTML = '';
-  uploadImage(file);
-}
+fileInput.addEventListener('change', ()=>{
+  if(fileInput.files.length){
+    const file = fileInput.files[0];
+    sessionStorage.setItem('uploadedFileName', file.name);
+    uploadAndRefresh(file);
+  }
+});
 
-// Upload image automatically
-async function uploadImage(file){
+async function uploadAndRefresh(file){
+  spinnerContainer.innerHTML = '<div class="spinner"></div>';
   const form = new FormData();
   form.append("reqtype","fileupload");
   form.append("fileToUpload", file);
+
   try{
     const res = await fetch("/api/upload",{ method:"POST", body:form });
     if(!res.ok) throw new Error(await res.text());
     const url = await res.text();
-    spinnerContainer.innerHTML = '';
-    uploadResult.innerHTML = `URL: <a href="${url}" target="_blank">${url}</a> 
-    <button onclick="copyURL('${url}')">Copy</button>`;
+    localStorage.setItem('lastUploadedURL', url); 
+    location.reload(); // reload halaman
   }catch(err){
     console.error(err);
     spinnerContainer.innerHTML = '';
-    uploadResult.innerHTML = `<pre>Error:\n${err.message}</pre>`;
+    alert("Upload gagal: "+err.message);
   }
 }
+
+// Tampilkan nama file & URL setelah reload
+window.addEventListener('DOMContentLoaded', ()=>{
+  const fileName = sessionStorage.getItem('uploadedFileName');
+  const url = localStorage.getItem('lastUploadedURL');
+  if(fileName) dropArea.textContent = `File terpilih: ${fileName}`;
+  if(url) document.getElementById('uploadResult').innerHTML = `URL: <a href="${url}" target="_blank">${url}</a> <button onclick="copyURL('${url}')">Copy URL</button>`;
+});
 
 // Copy URL
 function copyURL(url){
@@ -230,24 +159,29 @@ async function generateFigure(){
   const url = document.getElementById("urlInput").value.trim();
   const resultDiv = document.getElementById("figureResult");
   if(!url) return alert("Masukkan URL gambar!");
+
   resultDiv.innerHTML = '<div class="spinner"></div>';
+
   try{
     const res = await fetch(`/api/figure?url=${encodeURIComponent(url)}`);
     const contentType = res.headers.get("content-type");
     if(!res.ok) throw new Error(await res.text());
+
     if(contentType && contentType.includes("image")){
       const blob = await res.blob();
       const imgURL = URL.createObjectURL(blob);
-      resultDiv.innerHTML = `<img src="${imgURL}" alt="Figure Result"><br>
+      resultDiv.innerHTML = `<img src="${imgURL}" style="max-width:100%;height:auto;"><br>
       <a href="${imgURL}" download="figure.jpg"><button>Download</button></a>`;
-    } else throw new Error(await res.text());
+    } else {
+      throw new Error(await res.text());
+    }
   }catch(err){
     console.error(err);
     resultDiv.innerHTML = `<pre>Error:\n${err.message}</pre>`;
   }
 }
 
-// Animated bubbles
+// Generate animated bubbles
 for(let i=0;i<20;i++){
   const bubble = document.createElement('div');
   bubble.classList.add('bubble');
