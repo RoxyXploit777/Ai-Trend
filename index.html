@@ -9,7 +9,6 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background:#e0e7ff;
-  overflow-x:hidden;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -17,9 +16,10 @@ body {
   color:#1e293b;
   min-height:100vh;
   position:relative;
+  overflow-x:hidden;
 }
 
-/* Animated bubbles */
+/* Bubbles background */
 .bubble {
   position:absolute;
   border-radius:50%;
@@ -111,32 +111,6 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
 }
 @keyframes spin { 100% { transform:rotate(360deg); } }
 
-.copy-btn {
-  background:#10b981;
-  color:white;
-  margin-top:10px;
-  padding:10px 20px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-  transition:all 0.3s;
-}
-.copy-btn:hover {
-  background:#059669;
-  transform:translateY(-2px) scale(1.05);
-  box-shadow:0 6px 15px rgba(0,0,0,0.15);
-}
-
-#figureResult img {
-  max-width:100%;
-  max-height:400px;
-  object-fit:contain;
-  border-radius:15px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
-  margin-top:20px;
-}
-
 .instructions {
   margin-top:35px;
   max-width:500px;
@@ -147,7 +121,7 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
   box-shadow:0 8px 20px rgba(0,0,0,0.05);
   z-index:2;
 }
-.instructions h2 { margin-bottom:10px; color:#6366f1; }
+.instructions h2 { margin-bottom:10px; color:#6366f5; }
 .instructions li { margin-bottom:10px; line-height:1.5; }
 
 @media(max-width:500px){
@@ -167,16 +141,14 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
   <button id="tabFig" onclick="openTab('figure')">URL to Miniatur</button>
 </div>
 
-<!-- Tab Image to URL -->
 <div id="img" class="box active">
   <div class="drop-area" id="dropArea">Klik atau drop gambar di sini</div>
   <input type="file" id="fileInput">
   <button onclick="uploadImage()">Image to URL</button>
+  <button id="copyBtn" onclick="copyURL()" style="display:none;">Copy URL</button>
   <div id="uploadResult"></div>
-  <button id="copyUploadUrl" class="copy-btn" style="display:none;" onclick="copyUploadUrl()">Copy URL</button>
 </div>
 
-<!-- Tab URL to Miniatur -->
 <div id="figure" class="box">
   <input type="text" id="urlInput" placeholder="Masukkan URL gambar">
   <button onclick="generateFigure()">URL to Miniatur</button>
@@ -188,11 +160,10 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
 <ol>
 <li>Pilih tab <strong>Image to URL</strong> untuk mengubah gambar menjadi URL.</li>
 <li>Upload gambar dengan klik atau drop di kotak. Nama file akan muncul saat file dipilih.</li>
-<li>Klik tombol <strong>Image to URL</strong> untuk mendapatkan URL gambar.</li>
-<li>Gunakan tombol <strong>Copy URL</strong> untuk menyalin URL hasil upload.</li>
-<li>Pindah ke tab <strong>URL to Miniatur</strong> untuk membuat gambar menjadi figure miniatur.</li>
+<li>Klik tombol <strong>Image to URL</strong> untuk mendapatkan URL gambar, lalu bisa klik tombol Copy URL.</li>
+<li>Pindah ke tab <strong>URL to Miniatur</strongstrong> untuk membuat gambar menjadi figure miniatur.</li>
 <li>Masukkan URL hasil upload ke kolom, lalu klik <strong>URL to Miniatur</strong>.</li>
-<li>Hasil figure akan muncul di bawah dengan tombol download.</li>
+<li>Hasil figure akan muncul di bawah dengan tombol download. Halaman akan refresh otomatis setelah download.</li>
 </ol>
 </div>
 
@@ -209,6 +180,8 @@ function openTab(tab){
 // Drop & file input
 const dropArea = document.getElementById('dropArea');
 const fileInput = document.getElementById('fileInput');
+const copyBtn = document.getElementById('copyBtn');
+let uploadedURL = '';
 
 dropArea.addEventListener('click', ()=>fileInput.click());
 dropArea.addEventListener('dragover', e=>{ e.preventDefault(); dropArea.classList.add('hover'); });
@@ -220,7 +193,7 @@ dropArea.addEventListener('drop', e=>{
   showFileName(fileInput.files[0]);
 });
 
-// Show selected file name
+// Tampilkan nama file
 function showFileName(file){
   dropArea.textContent = `File terpilih: ${file.name}`;
 }
@@ -230,8 +203,6 @@ async function uploadImage(){
   if(!fileInput.files.length) return alert("Pilih file dulu!");
   const file = fileInput.files[0];
   const result = document.getElementById("uploadResult");
-  const copyBtn = document.getElementById("copyUploadUrl");
-  copyBtn.style.display="none";
 
   dropArea.textContent = `File terpilih: ${file.name}`;
   dropArea.innerHTML += '<div class="spinner"></div>';
@@ -244,23 +215,23 @@ async function uploadImage(){
     const res = await fetch("/api/upload",{ method:"POST", body:form });
     if(!res.ok) throw new Error(await res.text());
     const url = await res.text();
+    uploadedURL = url;
     dropArea.textContent = `File terpilih: ${file.name}`;
     result.innerHTML = `URL: <a href="${url}" target="_blank">${url}</a>`;
-    copyBtn.style.display="inline-block";
+    copyBtn.style.display = "inline-block";
   }catch(err){
     console.error(err);
     dropArea.textContent = `File terpilih: ${file.name}`;
     result.innerHTML = `<pre>Error:\n${err.message}</pre>`;
+    copyBtn.style.display = "none";
   }
 }
 
-// Copy URL for Image to URL
-function copyUploadUrl(){
-  const aTag = document.querySelector('#uploadResult a');
-  if(aTag){
-    navigator.clipboard.writeText(aTag.href).then(()=>alert('URL berhasil dicopy!'))
-    .catch(err=>alert('Gagal copy URL: '+err));
-  }
+// Copy URL
+function copyURL(){
+  if(!uploadedURL) return;
+  navigator.clipboard.writeText(uploadedURL);
+  alert("URL berhasil dicopy!");
 }
 
 // Generate figure
@@ -280,17 +251,20 @@ async function generateFigure(){
       const blob = await res.blob();
       const imgURL = URL.createObjectURL(blob);
       resultDiv.innerHTML = `<img src="${imgURL}" alt="Figure Result"><br>
-      <a href="${imgURL}" download="figure.jpg"><button>Download</button></a>`;
-    } else {
-      throw new Error(await res.text());
-    }
+      <a id="downloadLink" href="${imgURL}" download="figure.jpg"><button>Download</button></a>`;
+
+      // Otomatis refresh setelah download
+      document.getElementById("downloadLink").addEventListener('click', () => {
+        setTimeout(()=> location.reload(), 500);
+      });
+    } else throw new Error(await res.text());
   }catch(err){
     console.error(err);
     resultDiv.innerHTML = `<pre>Error:\n${err.message}</pre>`;
   }
 }
 
-// Animated bubbles
+// Generate animated bubbles
 for(let i=0;i<20;i++){
   const bubble = document.createElement('div');
   bubble.classList.add('bubble');
@@ -302,6 +276,5 @@ for(let i=0;i<20;i++){
   document.body.appendChild(bubble);
 }
 </script>
-
 </body>
 </html>
