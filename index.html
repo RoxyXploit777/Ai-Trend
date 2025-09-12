@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miniatur Converter</title>
+<title>Trend Pic Converter</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -55,15 +55,15 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
 </head>
 <body>
 
-<h1>Miniatur Converter</h1>
+<h1>Pic Converter</h1>
 
 <div class="tabs">
   <button id="tabImg" class="active" onclick="openTab('img')">Image to URL</button>
-  <button id="tabFig" onclick="openTab('figure')">URL to Miniatur</button>
+  <button id="tabFig" onclick="openTab('figure')">URL to Pic</button>
 </div>
 
 <div id="img" class="box active">
-  <div class="drop-area" id="dropArea">Klik atau drop gambar di sini</div>
+  <div class="drop-area" id="dropArea">Click Or Upload File Here</div>
   <input type="file" id="fileInput">
   <div id="spinnerContainer"></div>
   <div id="uploadResult"></div>
@@ -71,18 +71,18 @@ pre { color:red; text-align:left; white-space:pre-wrap; }
 
 <div id="figure" class="box">
   <input type="text" id="urlInput" placeholder="Masukkan URL gambar">
-  <button onclick="generateFigure()">URL to Miniatur</button>
+  <button onclick="generateFigure()">URL to Pic</button>
   <div id="figureResult"></div>
 </div>
 
 <div class="instructions">
-<h2>Cara Pakai:</h2>
+<h2>How To Use:</h2>
 <ol>
-<li>Pilih tab <strong>Image to URL</strong>.</li>
-<li>Drop gambar ke box. Halaman otomatis refresh, nama file dan URL akan muncul.</li>
-<li>Pindah ke tab <strong>URL to Miniatur</strong> untuk membuat miniatur.</li>
-<li>Masukkan URL hasil upload dan klik <strong>URL to Miniatur</strong>.</li>
-<li>Download hasil miniatur.</li>
+<li>Choose tab <strong>Image to URL</strong>.</li>
+<li>Drop Pic To Box. Web Automatic Refresh, Result Out.</li>
+<li>Choose Tab <strong>URL to Pic</strong> to make conversion.</li>
+<li>Paste Url Pic<strong>URL to Pic</strong>.</li>
+<li>Download Result Pic Trend Ai.</li>
 </ol>
 </div>
 
