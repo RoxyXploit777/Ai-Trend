@@ -11,7 +11,7 @@ export default async function handler(req) {
     if (!figureRes.ok) throw new Error("Failed to fetch figure");
 
     const arrayBuffer = await figureRes.arrayBuffer();
-    return new Response(arrayBuffer, { headers: { "Content-Type": "image/jpeg" } });
+    return new Response(arrayBuffer, { headers: { "Content-Type": "image/jpg" } });
   } catch (err) {
     return new Response(JSON.stringify({ error: "Failed to generate figure", details: err.message }), { status: 500 });
   }
